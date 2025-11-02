@@ -16,17 +16,21 @@ app.use("/api/verse", verseRoutes);
 
 // Serve frontend in production
 if (process.env.NODE_ENV === "production") {
+  // __dirname points to /server
   const serverDir = path.resolve();
-  const clientBuildPath = path.join(serverDir, "../client/dist");
+  const clientBuildPath = path.join(serverDir, "..", "client", "dist");
 
-  // Serve static files first
+  console.log("Serving React build from:", clientBuildPath);
+
+  // Serve static files
   app.use(express.static(clientBuildPath));
 
   // Fallback: send index.html for all non-API routes
-  app.use((req, res, next) => {
-    // Skip API routes
-    if (req.path.startsWith("/api/")) return next();
-
+  app.get("*", (req, res) => {
+    // Skip API routes just in case
+    if (req.path.startsWith("/api/")) {
+      return res.status(404).json({ error: "API route not found" });
+    }
     res.sendFile(path.join(clientBuildPath, "index.html"));
   });
 }
@@ -41,4 +45,8 @@ if (process.env.NODE_ENV !== "production") {
   });
 }
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () =>
+  console.log(
+    `Server running on port ${PORT} in ${process.env.NODE_ENV || "development"} mode`
+  )
+);
