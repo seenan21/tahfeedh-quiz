@@ -74,6 +74,11 @@ router.get("/", async (req, res) => {
       if (prev2) prevKeys.push(await fetchVerse(prev2));
     }
 
+    if (prevKeys.length === 2) {
+      prevKeys.reverse();
+    }
+
+
     res.json({ main, next2: nextKeys, prev2: prevKeys });
   } catch (err) {
     console.error("Error fetching verse:", err.response?.data || err.message);

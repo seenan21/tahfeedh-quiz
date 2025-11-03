@@ -181,15 +181,15 @@ export default function QuizQuestion({ question, index, total, score, setScore, 
       const text = item.text || item.text_uthmani_simple || item.text_uthmani || item.text_imlaei || "";
       const key = item.key || item.verse_key || item.ayah_key || null;
       return (
-        <div key={idx} className="text-right leading-relaxed" dir="rtl">
+        <div key={idx} className="text-3xl text-right leading-relaxed" dir="rtl">
           <span dangerouslySetInnerHTML={{ __html: text }} />{" "}
-          {key ? <span className="text-sm opacity-60"> — {key}</span> : null}
+          {key ? <span className="text-3xl opacity-60"> — {key}</span> : null}
         </div>
       );
     }
     // string
     return (
-      <div key={idx} className="text-right leading-relaxed" dir="rtl">
+      <div key={idx} className="text-3xl text-right leading-relaxed" dir="rtl">
         <span dangerouslySetInnerHTML={{ __html: item }} />
       </div>
     );
@@ -211,7 +211,7 @@ export default function QuizQuestion({ question, index, total, score, setScore, 
         ) : error ? (
           <div className="text-red-500">Error: {error}</div>
         ) : (
-          <div className="text-right leading-relaxed text-lg" dir="rtl">
+          <div className="text-right leading-relaxed text-3xl" dir="rtl">
             {typeof verseData === "string" ? (
               <span dangerouslySetInnerHTML={{ __html: verseData }} />
             ) : (
@@ -282,7 +282,7 @@ export default function QuizQuestion({ question, index, total, score, setScore, 
 
           {shownNextAnswer && (
             <>
-              <div className="bg-white p-3 border rounded-xl text-sm opacity-80 space-y-1">
+              <div className="bg-white p-3 border rounded-xl text-l opacity-80 space-y-1">
                 {next2 && next2.length > 0 ? next2.map((x, i) => renderVerseLine(x, i)) : <div className="text-gray-500">Answer not available</div>}
               </div>
 
@@ -311,7 +311,7 @@ export default function QuizQuestion({ question, index, total, score, setScore, 
 
           {shownPrevAnswer && (
             <>
-              <div className="bg-white p-3 border rounded-xl text-sm opacity-80 space-y-1">
+              <div className="bg-white p-3 border rounded-xl text-l opacity-80 space-y-1">
                 {prev2 && prev2.length > 0 ? prev2.map((x, i) => renderVerseLine(x, i)) : <div className="text-gray-500">Answer not available</div>}
               </div>
 
